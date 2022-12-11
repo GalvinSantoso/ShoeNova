@@ -1,0 +1,29 @@
+:root {
+    --primary-color: #f98724;
+    --primaryGradient-color: #f9a602;
+    --secondary-color: #252525;
+    --primary-background: #f3f1dc;
+    --secondary-background: #f2f2f2;
+}
+
+/* utility class */
+.bg-landing {
+    background-color: var(--primary-background);
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.footer {
+    background-color: var(--secondary-color);
+}
+
+/* component class */
+.btn-gradients {
+    background: linear-gradient(
+        180deg,
+        rgba(249, 135, 36, 1) 0%,
+        rgba(249, 166, 2, 1) 100%
+    );
+}
