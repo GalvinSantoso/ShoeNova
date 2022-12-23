@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('container')
-    <div class="container my-3">
+<section class="sec-bg">
+    <div class="container py-5">
         <div class="row" style="min-height: 80vh">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
                 <h1 class="display-1 fw-bold text-dark">Shoe<span class="primary-color">Nova</span></h1>
@@ -17,5 +18,5 @@
             </div>
         </div>
     </div>
-
+</section>
 @endsection

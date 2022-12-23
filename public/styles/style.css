@@ -11,6 +11,10 @@
     background-color: var(--primary-background);
 }
 
+.sec-bg {
+    background-color: var(--secondary-background);
+}
+
 .primary-color {
     color: var(--primary-color);
 }

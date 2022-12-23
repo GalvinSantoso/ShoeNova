@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class UserController extends Controller
 {
     function login(Request $req){
@@ -16,5 +18,15 @@ class UserController extends Controller
             $req->session()->put('user', $user);
             return redirect('/');
         }
+    }
+
+    function register(Request $req){
+        $user = new User;
+        $user->name = $req->name;
+        $user->email = $req->email;
+        $user->password = Hash::make($req->password);
+        $user->save();
+        return redirect('/login');
+
     }
 }

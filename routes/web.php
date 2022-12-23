@@ -30,4 +30,32 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/cartlist', function () {
+    return view('cartlist');
+});
+
+Route::get('/shop', function () {
+    return view('shop');
+});
+
+
+
+//user
 Route::post("/login", [UserController::class, 'login']);
+Route::view("/register",'register');
+Route::post("/register", [UserController::class, 'register']);
+Route::get('/logout', function () {
+    Session::forget('user');
+    return redirect('login');
+});
+
+//product
+Route::get('/shop',[ProductController::class, 'index']); 
+Route::get('/detail/{id}',[ProductController::class, 'detail']); 
+
+
+// cart
+Route::get('cartlist',[ProductController::class, 'cartList']); 
+Route::post('add_to_cart',[ProductController::class, 'addToCart']); 
+
+
