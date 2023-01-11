@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Session;
 
 
@@ -30,13 +32,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/cartlist', function () {
-    return view('cartlist');
-});
 
-Route::get('/shop', function () {
-    return view('shop');
-});
 
 
 
@@ -51,11 +47,33 @@ Route::get('/logout', function () {
 
 //product
 Route::get('/shop',[ProductController::class, 'index']); 
-Route::get('/detail/{id}',[ProductController::class, 'detail']); 
+Route::get('/detail/{id}',[ProductController::class, 'detail' ]); 
+Route::get('/category/{category_id}', [ProductController::class, 'category'])->name('category');
+
+//manage product
+
+
+Route::group(['middleware' => ['admin']], function(){
+    // update
+    Route::get('/manage/update/{product_id}', [AdminController::class, 'updateProduct'])->name('update');
+    Route::put('/manage/update/{product_id}', [AdminController::class, 'updateProductAction'])->name('updateAction');
+    // delete
+    Route::delete('/manage/delete/{product_id}', [AdminController::class, 'deleteProduct'])->name('delete');
+    //add
+    Route::get('/addProduct', [AdminController::class, 'addProduct']);
+    Route::post('/addProduct', [AdminController::class, 'store']);
+    Route::get('/manage', [AdminController::class, 'manage'])->name('manage');
+
+});
+
+
 
 
 // cart
-Route::get('cartlist',[ProductController::class, 'cartList']); 
-Route::post('add_to_cart',[ProductController::class, 'addToCart']); 
+Route::get('cartlist',[CartController::class, 'cartList']); 
+Route::post('add_to_cart',[CartController::class, 'addToCart']); 
+Route::delete('removeCart/{id}', [CartController::class, 'removeCart']);
+
+
 
 

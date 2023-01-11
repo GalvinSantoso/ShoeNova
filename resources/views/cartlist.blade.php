@@ -24,26 +24,36 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xl-3">
                                     <p class="lead fw-normal mb-2">{{$p->name}}</p>
-                                    <p><span class="text-muted">Detail : </span>{{$p->$detail}}</p>
+                                    <p><span class="text-muted">Detail : </span>{{$p->detail}}</p>
               
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                     <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                                        <i class="fas fa-minus"></i>
+                                    </button>
 
-                                    <input id="form1" min="0" name="quantity" value="{{$p->quantity}}" type="number" class="form-control form-control-sm" />
+                                    {{-- <input id="form1" min="0" name="quantity" value="{{$p->quantity}}" type="number" class="form-control form-control-sm" /> --}}
+                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <h5 class="mb-0">{{$p->quantity}}</h5>
+                                    </div>
 
                                     <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
+
                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                    <h5 class="mb-0">{{$p->price}}</h5>
+                                    <h5 class="mb-0">Price: {{$p->price}}</h5>
                                 </div>
+
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                    <form action="/removeCart/{{$p->cart_id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button type="submit" class="text-danger"><i class="fas fa-trash fa-lg"></i></button>
+                                    </form>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

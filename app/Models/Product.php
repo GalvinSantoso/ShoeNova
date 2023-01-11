@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $guarded =[];
+    public function scopeSearch($query){
+        if(request('search')){
+            return $query->where('name', 'like', '%' . request('search') . '%');
+        }else{
+            return $query;
+        }
+    }
     public function category(){
         $this->belongsTo(Category::class);
     }

@@ -27,6 +27,7 @@
           <ul class="dropdown-menu">
               @if((Session::has('user')))
               <li><a class="dropdown-item" href="/history">Purchase History</a></li>
+              <li><a class="dropdown-item" href="/manage">Manage</a></li>
               @endif
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>

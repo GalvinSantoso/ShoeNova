@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,119 +23,108 @@ class ProductDetailSeeder extends Seeder
         //     $table->string('color');
         //     $table->integer('quantity');
         //     $table->timestamps();
-        DB::table('product_details')->insert([
-            [
-                'product_id' => '2',
-                'size' => '39',
-                'color' => 'black',
-                'quantity' => '15',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '40',
-                'color' => 'black',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '41',
-                'color' => 'black',
-                'quantity' => '10',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '42',
-                'color' => 'black',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '43',
-                'color' => 'black',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '44',
-                'color' => 'black',
-                'quantity' => '5',
-            ],
-            // black
-            [
-                'product_id' => '2',
-                'size' => '39',
-                'color' => 'red',
-                'quantity' => '15',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '40',
-                'color' => 'red',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '41',
-                'color' => 'red',
-                'quantity' => '10',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '42',
-                'color' => 'red',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '43',
-                'color' => 'red',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '44',
-                'color' => 'red',
-                'quantity' => '5',
-            ],
-            //red
-            [
-                'product_id' => '2',
-                'size' => '39',
-                'color' => 'white',
-                'quantity' => '15',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '40',
-                'color' => 'white',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '41',
-                'color' => 'white',
-                'quantity' => '10',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '42',
-                'color' => 'white',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '43',
-                'color' => 'white',
-                'quantity' => '5',
-            ],
-            [
-                'product_id' => '2',
-                'size' => '44',
-                'color' => 'white',
-                'quantity' => '5',
-            ]
-            //white
-        ]);
+        
+        $products = Product::all();
+
+        foreach ($products as $p) {
+            DB::table('product_details')->insert([
+                [
+                    'product_id' => $p->id,
+                    'size' => '39',
+                    'color' => 'black',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '40',
+                    'color' => 'black',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '41',
+                    'color' => 'black',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '42',
+                    'color' => 'black',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '43',
+                    'color' => 'black',
+                ],
+                [
+                    'product_id' =>$p->id,
+                    'size' => '44',
+                    'color' => 'black',
+                ],
+                // black
+                [
+                    'product_id' => $p->id,
+                    'size' => '39',
+                    'color' => 'red',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '40',
+                    'color' => 'red',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '41',
+                    'color' => 'red',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '42',
+                    'color' => 'red',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '43',
+                    'color' => 'red',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '44',
+                    'color' => 'red',
+                ],
+                //red
+                [
+                    'product_id' => $p->id,
+                    'size' => '39',
+                    'color' => 'white',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '40',
+                    'color' => 'white',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '41',
+                    'color' => 'white',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '42',
+                    'color' => 'white',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '43',
+                    'color' => 'white',
+                ],
+                [
+                    'product_id' => $p->id,
+                    'size' => '44',
+                    'color' => 'white',
+                ]
+                //white
+            ]);
+            
+        }
+
 
     
     }
