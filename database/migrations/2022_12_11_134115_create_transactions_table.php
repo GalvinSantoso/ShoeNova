@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->integer('quantity');
+            $table->integer('size');
+            $table->String('color');
             $table->timestamps();
         });
     }

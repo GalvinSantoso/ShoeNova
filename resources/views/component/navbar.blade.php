@@ -15,9 +15,12 @@
         </ul>
       </div>
       <ul class="navbar-nav ms-auto flex-row">
+        @if (Session::has('user') && !(Session::get('user')['role']=='admin'))
         <li class="nav-item d-flex align-items-center mx-2 d-block">
-            <a href="/cartlist"><i class="uil uil-shopping-cart-alt text-dark fs-4"></i></a>
+          <a href="/cartlist"><i class="uil uil-shopping-cart-alt text-dark fs-4"></i></a>
         </li>
+        @endif
+        
 
         @if(Session::has('user'))
         <div class="nav-item dropdown"> 
@@ -26,8 +29,10 @@
           </a>
           <ul class="dropdown-menu">
               @if((Session::has('user')))
-              <li><a class="dropdown-item" href="/history">Purchase History</a></li>
-              <li><a class="dropdown-item" href="/manage">Manage</a></li>
+              <li><a class="dropdown-item" href="/transactionHistory">Purchase History</a></li>
+                @if ((Session::has('user')) && !(Session::get('user')['role']==''))
+                <li><a class="dropdown-item" href="/manage">Manage</a></li>
+                @endif
               @endif
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>

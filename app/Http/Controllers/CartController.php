@@ -31,20 +31,17 @@ class CartController extends Controller
         return Cart::where('user_id',$userId)->count();
     }
 
-   
-
     function cartList(){
-
         $userId=Session::get('user')['id'];
         $products= DB::table('cart')
         ->join('products','cart.product_id','=','products.id')
         ->where('cart.user_id',$userId)
-        ->select('products.*','cart.id as cart_id','quantity')
+        ->select('products.*','cart.id as cart_id','quantity','size','color')
         ->get();
         if($products->isNotEmpty()){
             $price = [];
             foreach ($products as $item) {
-                $prices[] = $item->price;
+                $prices[] = $item->price*$item->quantity;
             }
             $total = array_sum($prices);
             return view('cartlist', compact('products', 'total'));
@@ -57,4 +54,5 @@ class CartController extends Controller
         Cart::destroy($id);
         return redirect('cartlist');
     }
+
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
     <script src="https://kit.fontawesome.com/1592d61c16.js" crossorigin="anonymous"></script>
-
+    <style>body{overflow-x: hidden }</style>
 </head>
   <body>
     {{-- navbar --}}

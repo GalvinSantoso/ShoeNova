@@ -22,4 +22,7 @@ class Product extends Model
     public function product_detail(){
         $this->hasMany(Product_detail::class);
     }
+    public function transaction(){
+        return $this->belongsToMany(Transaction::class);
+    }
 }

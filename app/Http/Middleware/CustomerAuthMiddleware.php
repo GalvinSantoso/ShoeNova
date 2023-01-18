@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminAuthMiddleware
+class CustomerAuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +17,7 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(!Auth::check() || auth()->user()->role !== 'admin'){
-        //     return redirect()->back();
-        // }
-        // if(Auth::user() && session()->get('user')['admin']==NULL){
-        //     return redirect()->back();
-        // }
-        
-        if(Auth::check() && Auth::user()->role == 'admin'){
+        if(Auth::check() && Auth::user()->role == ''){
             return $next($request);
         }
         return redirect('/');

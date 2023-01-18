@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 
 
 
@@ -52,8 +53,8 @@ Route::get('/category/{category_id}', [ProductController::class, 'category'])->n
 
 //manage product
 
-
-Route::group(['middleware' => ['admin']], function(){
+Route::middleware(['admin'])->group(function () {
+    Route::get('/manage', [AdminController::class, 'manage']);
     // update
     Route::get('/manage/update/{product_id}', [AdminController::class, 'updateProduct'])->name('update');
     Route::put('/manage/update/{product_id}', [AdminController::class, 'updateProductAction'])->name('updateAction');
@@ -62,18 +63,20 @@ Route::group(['middleware' => ['admin']], function(){
     //add
     Route::get('/addProduct', [AdminController::class, 'addProduct']);
     Route::post('/addProduct', [AdminController::class, 'store']);
-    Route::get('/manage', [AdminController::class, 'manage'])->name('manage');
-
+    
+    
 });
 
 
 
 
 // cart
-Route::get('cartlist',[CartController::class, 'cartList']); 
-Route::post('add_to_cart',[CartController::class, 'addToCart']); 
-Route::delete('removeCart/{id}', [CartController::class, 'removeCart']);
+Route::get('/cartlist',[CartController::class, 'cartList'])->middleware('customer'); 
+Route::post('/add_to_cart',[CartController::class, 'addToCart']); 
+Route::delete('/removeCart/{id}', [CartController::class, 'removeCart']);
 
+Route::get('/transactionHistory', [TransactionController::class, 'index']);
+Route::post('/transactionHistory', [TransactionController::class, 'checkOut']);
 
 
 

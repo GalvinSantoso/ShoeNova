@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     function login(Request $req){
-        $req->validate([
+        $credentials = $req->validate([
             'email' => 'required|email',
             'password' =>'required'
         ]);
@@ -21,14 +22,12 @@ class UserController extends Controller
             Cookie::queue('emailCookie', $req->email, 60);
             Cookie::queue('passwordCookie', $req->password, 60);
         }
-
-        $user = User::where(['email' => $req->email])->first();
-        if(!$user || !Hash::check($req->password, $user->password)){
-            return back()->with('loginError', 'Login Failed');
-        }else{
-            $req->session()->put('user', $user);
-            return redirect('/');
+        if(Auth::attempt($credentials)){
+            $req->session()->regenerate();
+            $req->session()->put('user', Auth::user());
+            return redirect()->intended('/');
         }
+        return back()->with('loginError', 'Login Failed');
     }
 
     function register(Request $req){
@@ -41,6 +40,5 @@ class UserController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);
         return redirect('/login')->with('success', 'Registration Success');
-
     }
 }
